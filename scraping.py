@@ -1,9 +1,9 @@
-# Import Splinter and BeautifulSoup
+# Import Splinter, BeautifulSoup, and Pandas
 from splinter import Browser
 from bs4 import BeautifulSoup as soup
-from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import datetime as dt
+from webdriver_manager.chrome import ChromeDriverManager
 
 def scrape_all():
     # Initiate headless driver for deployment
@@ -12,7 +12,7 @@ def scrape_all():
 
     news_title, news_paragraph = mars_news(browser)
 
-    # Run all scraping functions and store results in dictionary
+    # Run all scraping functions and store results in a dictionary
     data = {
         "news_title": news_title,
         "news_paragraph": news_paragraph,
@@ -69,30 +69,32 @@ def featured_image(browser):
     try:
         # Find the relative image url
         img_url_rel = img_soup.find('img', class_='fancybox-image').get('src')
+
     except AttributeError:
         return None
 
-    # Use the base URL to create an absolute URL
+    # Use the base url to create an absolute url
     img_url = f'https://spaceimages-mars.com/{img_url_rel}'
-    
+
     return img_url
 
 def mars_facts():
-    # Mars Facts
     # Add try/except for error handling
     try:
-        # use 'read_html" to scrape the facts table into a dataframe
+        # Use 'read_html' to scrape the facts table into a dataframe
         df = pd.read_html('https://galaxyfacts-mars.com')[0]
+
     except BaseException:
         return None
 
     # Assign columns and set index of dataframe
-    df.columns=['description', 'Mars', 'Earth']
-    df.set_index('description', inplace=True)
+    df.columns=['Description', 'Mars', 'Earth']
+    df.set_index('Description', inplace=True)
 
     # Convert dataframe into HTML format, add bootstrap
-    return df.to_html(classes="table table-striped")
+    return df.to_html()
 
 if __name__ == "__main__":
+
     # If running as script, print scraped data
     print(scrape_all())
