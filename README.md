@@ -7,8 +7,13 @@ Every time someone clicks on "Scrape New Image", a new image and description wil
 
 On the right side, a simple comparison between the planet Earth and Mars.
 
+
 <img src="https://github.com/juliomeza/Mission-to-Mars/blob/main/screenshots/Mars.png">
 
 In the second half of, four images of Mars are shown for each of the hemispheres.
 
+
 <img src="https://github.com/juliomeza/Mission-to-Mars/blob/main/screenshots/Mars_4.png">
+
+## Summary
+This code can be used as a template for any other website project.
